@@ -20,17 +20,20 @@ def add_command():
     list1.insert(END, title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get()))
 
 def get_selected_row(event):
-    global selected_id
-    selected_id.curselecion()[0]
-    e1.delete(0, END)
-    e2.delete(0, END)
-    e3.delete(0, END)
-    e4.delete(0, END)
-    e1.insert(END, selected_tuple[1])
-    e1.insert(END, selected_tuple[2])
-    e1.insert(END, selected_tuple[3])
-    e1.insert(END, selected_tuple[4])
-    return selected_tuple
+    try:
+        global selected_id
+        selected_id.curselecion()[0]
+        e1.delete(0, END)
+        e2.delete(0, END)
+        e3.delete(0, END)
+        e4.delete(0, END)
+        e1.insert(END, selected_tuple[1])
+        e1.insert(END, selected_tuple[2])
+        e1.insert(END, selected_tuple[3])
+        e1.insert(END, selected_tuple[4])
+        return selected_tuple
+    except:
+        pass
 
 def delete_command():
     backend.delete(selected_id)
@@ -38,8 +41,6 @@ def delete_command():
 def update_command():
     backend.update(selected_id, title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get())
                    
-                   
-
 l1 = Label(window, text = "Title")
 l1.grid(row=0, column=0)
 
