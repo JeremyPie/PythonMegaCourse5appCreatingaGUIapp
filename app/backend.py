@@ -7,7 +7,6 @@ class Database():
         self.cur.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMERY KEY, title TEXT, author TEXT, year INTEGER, isbn INTEGER)")
         self.conn.commit()
 
-
     def insert(self):
         self.cur.execute("INSERT INTO book VALUES (?,?,?,?)", (title, author, year, isbn)
         self.conn.commit()                   
