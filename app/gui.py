@@ -2,7 +2,8 @@ from tkinter import *
 import backend
 
 window = Tk()
-
+window.wm_title("BookStore)
+                
 def view_command():
     list1.delete(0, END)
     for row in backend.view():
@@ -18,7 +19,27 @@ def add_command():
     list1.delete(0, END)
     list1.insert(END, title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get()))
 
+def get_selected_row(event):
+    global selected_id
+    selected_id.curselecion()[0]
+    e1.delete(0, END)
+    e2.delete(0, END)
+    e3.delete(0, END)
+    e4.delete(0, END)
+    e1.insert(END, selected_tuple[1])
+    e1.insert(END, selected_tuple[2])
+    e1.insert(END, selected_tuple[3])
+    e1.insert(END, selected_tuple[4])
+    return selected_tuple
+
+def delete_command():
+    backend.delete(selected_id)
     
+def update_command():
+    backend.update(selected_id, title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get())
+                   
+                   
+
 l1 = Label(window, text = "Title")
 l1.grid(row=0, column=0)
 
@@ -49,6 +70,7 @@ e1.grid(row=1, column=3)
 
 list1 = Listbox(window, height=6, width=35, rowspan=6, columnspan=2)
 list1.grid(row=2, column=0)
+list1.bind('<<ListboxSelect>>' get_selected_row)
 
 sb1 = Scrolbar(window)
 sb1.grid(row=2, column=2, rowspan=6)
@@ -64,13 +86,13 @@ b1.grid(row=2, column=3)
 b1 = Button(window, text = "Add entry", command = add_command)
 b1.grid(row=3, column=3)
 
-b1 = Button(window, text = "Update")
+b1 = Button(window, text = "Update", command = update_command)
 b1.grid(row=4, column=3)
 
-b1 = Button(window, text = "Delete")
+b1 = Button(window, text = "Delete", command = delete_command)
 b1.grid(row=5, column=3)
 
-b1 = Button(window, text = "Close")
+b1 = Button(window, text = "Close", command = window.destroy)
 b1.grid(row=6, column=3)
 
 window.mainloop()
