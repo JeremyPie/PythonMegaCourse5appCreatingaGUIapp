@@ -1,7 +1,24 @@
 from tkinter import *
+import backend
 
 window = Tk()
 
+def view_command():
+    list1.delete(0, END)
+    for row in backend.view():
+        list1.insert(END, row)
+        
+def search_command():
+    list1.delete(0, END)
+    for row in backend.search(title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get())):
+        list1.insert(END, row)
+        
+def add_command():
+    backend.insert(title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get()))
+    list1.delete(0, END)
+    list1.insert(END, title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get()))
+
+    
 l1 = Label(window, text = "Title")
 l1.grid(row=0, column=0)
 
@@ -38,13 +55,13 @@ sb1.grid(row=2, column=2, rowspan=6)
 list1.configure(yscorllcommand = sb1.set)
 sb1.configure(command = list1.yview)
 
-b1 = Button(window, text = "View all")
+b1 = Button(window, text = "View all", command = view_command)
 b1.grid(row=2, column=3)
 
-b1 = Button(window, text = "Search entry")
+b1 = Button(window, text = "Search entry", command = search_command)
 b1.grid(row=2, column=3)
 
-b1 = Button(window, text = "Add entry")
+b1 = Button(window, text = "Add entry", command = add_command)
 b1.grid(row=3, column=3)
 
 b1 = Button(window, text = "Update")
@@ -57,4 +74,3 @@ b1 = Button(window, text = "Close")
 b1.grid(row=6, column=3)
 
 window.mainloop()
-
