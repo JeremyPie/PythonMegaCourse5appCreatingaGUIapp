@@ -4,7 +4,10 @@ from backend import Database
 database = Database("book.db")       
 
 class Window():
-    def __init__(self):        
+    def __init__(self,window):  
+        self.window = window
+        self.window.wm_title("Bookstore")
+        
         l1 = Label(self.window, text = "Title")
         l1.grid(row=0, column=0)
 
