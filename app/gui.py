@@ -1,9 +1,8 @@
 from tkinter import *
-import backend
+from backend import Database
 
-window = Tk()
-window.wm_title("BookStore)
-                
+database = Database("book.db")       
+
 def view_command():
     list1.delete(0, END)
     for row in backend.view():
@@ -40,6 +39,9 @@ def delete_command():
     
 def update_command():
     backend.update(selected_id, title_text.get(), author_text.get(), int(year_text.get()), int(isbn.get())
+                   
+window = Tk()
+window.wm_title("BookStore)
                    
 l1 = Label(window, text = "Title")
 l1.grid(row=0, column=0)
